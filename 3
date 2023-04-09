@@ -25,30 +25,81 @@ Tab2:CreateToggle({
         	end
 })
 
+
+
 Tab2:CreateToggle({
 	Name = "Tackle Reach",
 	Default = false,
 	Callback = function(state)
 if state then
-               game.Players.LocalPlayer.Character.HumanoidRootPart.Size = Vector3.new(8, 2, 8)
+                 game.Players.LocalPlayer.Character.Box.Size = Vector3.new(5, 7, 2.5)
 
-                 game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = 0.3
+                 game.Players.LocalPlayer.Character.Box.Transparency = 0.3
         
-                 game.Players.LocalPlayer.Character.HumanoidRootPart.Material = "Neon"
+                 game.Players.LocalPlayer.Character.Box.Material = "Neon"
   
-            game.Players.LocalPlayer.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really red")
+            game.Players.LocalPlayer.Character.Box.BrickColor = BrickColor.new("Really blue")
 
-                 game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide = true 
+                 game.Players.LocalPlayer.Character.Box.CanCollide = true 
+
      
 else
-           game.Players.LocalPlayer.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+           game.Players.LocalPlayer.Character.Box.Size = Vector3.new(5, 7, 2.5)
 
-                 game.Players.LocalPlayer.Character.HumanoidRootPart.Transparency = 1
+                 game.Players.LocalPlayer.Character.Box.Transparency = 1
         
-                 game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide = false 
+                 game.Players.LocalPlayer.Character.Box.CanCollide = true 
      
     
     end
+        	end
+})
+
+
+Tab2:CreateToggle({
+	Name = "Infinite Jump (Toggleable)",
+	Default = false,
+	Callback = function(state)
+if state then
+    local Player = game:GetService'Players'.LocalPlayer;
+local UIS = game:GetService'UserInputService';
+ 
+_G.JumpHeight = 35;
+ 
+function Action(Object, Function) if Object ~= nil then Function(Object); end end
+ 
+UIS.InputBegan:connect(function(UserInput)
+    if UserInput.UserInputType == Enum.UserInputType.Keyboard and UserInput.KeyCode == Enum.KeyCode.Space then
+        Action(Player.Character.Humanoid, function(self)
+            if self:GetState() == Enum.HumanoidStateType.Jumping or self:GetState() == Enum.HumanoidStateType.Freefall then
+                Action(self.Parent.HumanoidRootPart, function(self)
+                    self.Velocity = Vector3.new(0, _G.JumpHeight, 0);
+                end)
+            end
+        end)
+    end
+end)
+     
+else
+      local Player = game:GetService'Players'.LocalPlayer;
+local UIS = game:GetService'UserInputService';
+ 
+_G.JumpHeight = 0;
+ 
+function Action(Object, Function) if Object ~= nil then Function(Object); end end
+ 
+UIS.InputBegan:connect(function(UserInput)
+    if UserInput.UserInputType == Enum.UserInputType.Keyboard and UserInput.KeyCode == Enum.KeyCode.Space then
+        Action(Player.Character.Humanoid, function(self)
+            if self:GetState() == Enum.HumanoidStateType.Jumping or self:GetState() == Enum.HumanoidStateType.Freefall then
+                Action(self.Parent.HumanoidRootPart, function(self)
+                    self.Velocity = Vector3.new(0, _G.JumpHeight, 0);
+                end)
+            end
+        end)
+    end
+end)
+end
         	end
 })
 
